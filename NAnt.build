@@ -908,13 +908,14 @@
         <!-- create wrapper script -->
         <echo message="Installing NAnt wrapper script to '${install.bindir}' ..." />
         <property name="wrapper" value="${path::combine(install.bindir, 'nant')}" />
+        <property name="mono-bin-path" value="${pkg-config::get-variable('mono', 'prefix')}" />
         <!-- 
             create wrapper file using separate echo tasks for each line to ensure
             the line endings of the generated file match the platform on which 
             the wrapper is created
         -->
         <echo file="${wrapper}" append="false">#!/bin/sh${environment::newline()}</echo>
-        <echo file="${wrapper}" append="true">exec ${path::combine(install.prefix, 'bin')}/mono ${path::combine(install.nant, 'bin')}/NAnt.exe "$@"</echo>
+        <echo file="${wrapper}" append="true">exec ${path::combine(mono-bin-path, 'bin')}/mono ${path::combine(install.nant, 'bin')}/NAnt.exe "$@"</echo>
         <exec program="chmod" commandline="a+x ${path::combine(install.bindir, 'nant')}" />
     </target>
 </project>
