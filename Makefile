@@ -1,6 +1,6 @@
 # NAnt make makefile for Mono
 MONO=mono
-MCS=gmcs
+MCS=mcs
 RESGEN=resgen
 TARGET=mono-2.0
 
